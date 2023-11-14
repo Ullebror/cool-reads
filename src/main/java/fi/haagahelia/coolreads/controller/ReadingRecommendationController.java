@@ -51,7 +51,7 @@ public class ReadingRecommendationController {
 		 Recommendation recommendation = readingRepository.findById(id).orElse(null);
 		 if (recommendation != null) {
 			 model.addAttribute("recommendation", recommendation);
-	         return "editrecommedation";
+	         return "editrecommendation";
 	     } else {
 	         return "redirect:/recommendationlist";  // Or redirect to an error page if you'd like.
 	     }
