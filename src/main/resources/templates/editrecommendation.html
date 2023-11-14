@@ -12,33 +12,46 @@
 </head>
 <body>
 	<div class="container mt-5 bold-text">
-		<form th:action="@{/saveEditedReadingRecommendation}" th:object="${recommendation}" method="post" class="form-group">
+		<form th:action="@{/saveEditedReadingRecommendation}"
+			th:object="${recommendation}" method="post" class="form-group">
+			<!-- Id Field -->
+			<div class="mb-3">
+				<label for="id" class="form-label">Id</label> <input type="text"
+					class="form-control" th:value="${recommendation.id}" th:field="*{id}"
+					required readonly />
+			</div>
+
 			<!-- Title Field -->
 			<div class="mb-3">
-				<label for="title" class="form-label">Title</label> 
-				<input type="text" id="title" class="form-control" th:field="*{title}" required />
+				<label for="title" class="form-label">Title</label> <input
+					type="text" id="title" class="form-control" th:field="*{title}"
+					required />
 			</div>
 
 			<!-- Link Field -->
 			<div class="mb-3">
-				<label for="link" class="form-label">Link</label> 
-				<input type="url" id="link" class="form-control" th:field="*{link}" required pattern="https?://.*" />
+				<label for="link" class="form-label">Link</label> <input type="url"
+					id="link" class="form-control" th:field="*{link}" required
+					pattern="https?://.*" />
 			</div>
 
 			<!-- Description Field -->
 			<div class="mb-3">
-				<label for="description" class="form-label">Description</label> 
-				<textarea id="description" class="form-control" th:field="*{description}" required></textarea>
+				<label for="description" class="form-label">Description</label>
+				<textarea id="description" class="form-control"
+					th:field="*{description}" required></textarea>
 			</div>
 
 			<!-- Submit Button -->
 			<div class="mb-3">
-				<input type="submit" value="Save Changes" class="btn btn-primary rounded-pill" />
+				<input type="submit" value="Save Changes"
+					class="btn btn-primary rounded-pill" />
 			</div>
 
 		</form>
 	</div>
 
-	<script src="/js/bootstrap.bundle.min.js" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+	<script src="/js/bootstrap.bundle.min.js"
+		th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

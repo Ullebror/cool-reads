@@ -46,20 +46,20 @@ public class ReadingRecommendationController {
 		return "recommendationlist";
 	}
 	
-	@GetMapping("/readingRecommendations/{id}/edit")
+	@GetMapping("/edit/{id}")
 	 public String editReadingRecommendation(@PathVariable("id") Long id, Model model) {
 		 Recommendation recommendation = readingRepository.findById(id).orElse(null);
 		 if (recommendation != null) {
 			 model.addAttribute("recommendation", recommendation);
-	         return "editrecommedation";
+	         return "editrecommendation";
 	     } else {
-	         return "redirect:/recommendationlist";  // Or redirect to an error page if you'd like.
+	         return "redirect:/";
 	     }
 	 }
 
 	 @PostMapping("/saveEditedReadingRecommendation")
 	 public String saveEditedBook(@ModelAttribute Recommendation recommendationForm) {
 		 readingRepository.save(recommendationForm);
-	     return "redirect:/recommendationlist";
+	     return "redirect:/";
 	 }
 }
