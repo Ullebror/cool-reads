@@ -5,7 +5,7 @@
 	<div layout:fragment="content">
 		<h1>Reading recommendations</h1>
 
-		<table>
+		<table class="table">
 			<tr>
 				<th>Title</th>
 				<th>Link</th>
@@ -13,12 +13,12 @@
 			</tr>
 			<tr th:each="recommendation : ${recommendations}">
 				<td th:text="${recommendation.title}"></td>
-				<td th:text="${recommendation.link}"></td>
+				<td><a th:text="${recommendation.link}"  th:href="@{${recommendation.link}}"></a></td>
 				<td th:text="${recommendation.description}"></td>
 			</tr>
 		</table>
 
-		<a class="btn btn-primary" href="/messages/add">Add a message </a>
+		<a class="btn btn-primary" href="/add">Add a Reading recommendation </a>
 	</div>
 </body>
 </html>
