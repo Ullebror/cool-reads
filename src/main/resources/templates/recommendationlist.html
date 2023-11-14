@@ -10,11 +10,15 @@
 				<th>Title</th>
 				<th>Link</th>
 				<th>Description</th>
+				<th>Actions</th>
 			</tr>
 			<tr th:each="recommendation : ${recommendations}">
 				<td th:text="${recommendation.title}"></td>
 				<td><a th:text="${recommendation.link}"  th:href="@{${recommendation.link}}"></a></td>
 				<td th:text="${recommendation.description}"></td>
+				<td>
+                	<a th:href="@{/editReadingRecommendations/{id}(id=${recommendation.id})}" class="btn btn-primary btn-xs">Edit</a>
+            </td>
 			</tr>
 		</table>
 

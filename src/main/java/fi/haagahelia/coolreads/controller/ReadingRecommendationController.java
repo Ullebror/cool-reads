@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -43,4 +45,21 @@ public class ReadingRecommendationController {
 		model.addAttribute("recommendations", recommendations);
 		return "recommendationlist";
 	}
+	
+	@GetMapping("/readingRecommendations/{id}/edit")
+	 public String editReadingRecommendation(@PathVariable("id") Long id, Model model) {
+		 Recommendation recommendation = readingRepository.findById(id).orElse(null);
+		 if (recommendation != null) {
+			 model.addAttribute("recommendation", recommendation);
+	         return "editrecommedation";
+	     } else {
+	         return "redirect:/recommendationlist";  // Or redirect to an error page if you'd like.
+	     }
+	 }
+
+	 @PostMapping("/saveEditedReadingRecommendation")
+	 public String saveEditedBook(@ModelAttribute Recommendation recommendationForm) {
+		 readingRepository.save(recommendationForm);
+	     return "redirect:/recommendationlist";
+	 }
 }
