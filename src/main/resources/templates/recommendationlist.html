@@ -17,6 +17,10 @@
 				<td><a th:text="${recommendation.link}"  th:href="@{${recommendation.link}}"></a></td>
 				<td th:text="${recommendation.description}"></td>
 				<td>
+                    <!-- Delete Button -->
+                    <a th:href="@{/delete/{id}(id=${recommendation.id})}" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+        </td>
+				<td>
                 	<a th:href="@{/edit/{id}(id=${recommendation.id})}" class="btn btn-primary btn-xs">Edit</a>
             </td>
 			</tr>

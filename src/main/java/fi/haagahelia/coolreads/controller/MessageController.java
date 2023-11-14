@@ -7,11 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import fi.haagahelia.coolreads.repository.MessageRepository;
-import jakarta.validation.Valid;
 import fi.haagahelia.coolreads.dto.AddMessageDto;
 import fi.haagahelia.coolreads.model.Message;
 
@@ -24,7 +25,6 @@ public class MessageController {
 	public String listMessages(Model model) {
 		List<Message> messages = messageRepository.findAll();
 		model.addAttribute("messages", messages);
-
 		return "messagelist";
 	}
 	

@@ -62,4 +62,9 @@ public class ReadingRecommendationController {
 		 readingRepository.save(recommendationForm);
 	     return "redirect:/";
 	 }
+	 @GetMapping("/delete/{id}")
+	 public String deleteRecommendation(@PathVariable("id") Long id, Model model) {
+	     readingRepository.deleteById(id);
+	     return "redirect:/";
+	 }
 }
