@@ -19,8 +19,8 @@ import fi.haagahelia.coolreads.model.Message;
 public class MessageController {
 	@Autowired
 	private MessageRepository messageRepository;
-
-	@GetMapping("/")
+	
+	@GetMapping("/messagelist")
 	public String listMessages(Model model) {
 		List<Message> messages = messageRepository.findAll();
 		model.addAttribute("messages", messages);
