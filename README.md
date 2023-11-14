@@ -1,9 +1,12 @@
-# Example project
+# Cool Reads
+Cool Reads is a web application developed as part of a Scrum team project. The application allows users to collect, organize, and share various reading materials like blog posts, tutorials, and news articles. Implemented in sprints, the project focuses on user registration, content categorization, and personalized reading lists.
 
-This is an example project for the Software Development Project 1 course. This project has been initialized using the [Spring Initializr](https://start.spring.io/).
-Olli Salo ?
-Olli Salo! and stuff
-Egor modification!
-Minh Nguyen
-Edoardo Vacca
-Egor Chumakov
+## Team members
+- [Edoardo Vacca](https://github.com/edoardovac)
+- [Egor Chumakov](https://github.com/EgorCD)
+- [Olli Salo](https://github.com/Ullebror)
+- [Minh Nguyen](https://github.com/NguyenMinh03)
+
+## Backlogs
+- [Product Backlog](https://github.com/orgs/Airplane-2/projects/1)
+- [Sprint 1 Backlog](https://github.com/orgs/Airplane-2/projects/3)
