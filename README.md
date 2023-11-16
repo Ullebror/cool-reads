@@ -5,7 +5,7 @@ Cool Reads is a web application developed as part of a Scrum team project. The a
 ## Usage Guide
 
 1. Clone the repository
-2. Open Git Bash in the folder for the project
+2. Open Git Bash in the folder of the project
 3. Run the following command: `./mvnw spring-boot:run`
 4. Open your browser and navigate to [localhost:8080](https://localhost:8080/)
 
