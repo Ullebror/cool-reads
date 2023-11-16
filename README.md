@@ -4,6 +4,8 @@ Cool Reads is a web application developed as part of a Scrum team project. The a
 
 ## Usage Guide
 
+This Project requires Java version 17
+
 1. Clone the repository
 2. Open Git Bash in the folder of the project
 3. Run the following command: `./mvnw spring-boot:run`
