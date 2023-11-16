@@ -1,54 +1,53 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout.html}">
 <head>
-<title>Edit Reading Recommendation</title>
-<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"
-	th:href="@{/css/bootstrap.min.css}" />
-<style>
-.bold-text * {
-	font-weight: bold;
-}
-</style>
+<meta charset="ISO-8859-1">
+<title>Edit a Recommendation</title>
+</head>
 </head>
 <body>
-	<div class="container mt-5 bold-text">
-		<form th:action="@{/saveEditedReadingRecommendation}"
-			th:object="${recommendation}" method="post" class="form-group">
-			<!-- Id Field -->
-			<div class="mb-3">
-				<label for="id" class="form-label">Id</label> <input type="text"
-					class="form-control" th:value="${recommendation.id}" th:field="*{id}"
-					required readonly />
-			</div>
+	<div layout:fragment="content">
+		<div class="container mt-5 bold-text">
+			<form th:action="@{/saveEditedReadingRecommendation}"
+				th:object="${recommendation}" method="post" class="form-group">
+				<!-- Id Field -->
+				<!-- Hidden Id Field -->
+				<div class="mb-3">
+					<input type="hidden" class="form-control"
+						th:value="${recommendation.id}" th:field="*{id}" required />
+				</div>
 
-			<!-- Title Field -->
-			<div class="mb-3">
-				<label for="title" class="form-label">Title</label> <input
-					type="text" id="title" class="form-control" th:field="*{title}"
-					required />
-			</div>
+				<!-- Title Field -->
+				<div class="mb-3">
+					<label for="title" class="form-label">Title</label> <input
+						type="text" id="title" class="form-control" th:field="*{title}"
+						required />
+				</div>
 
-			<!-- Link Field -->
-			<div class="mb-3">
-				<label for="link" class="form-label">Link</label> <input type="url"
-					id="link" class="form-control" th:field="*{link}" required
-					pattern="https?://.*" />
-			</div>
+				<!-- Link Field -->
+				<div class="mb-3">
+					<label for="link" class="form-label">Link</label> <input type="url"
+						id="link" class="form-control" th:field="*{link}" required
+						pattern="https?://.*" />
+				</div>
 
-			<!-- Description Field -->
-			<div class="mb-3">
-				<label for="description" class="form-label">Description</label>
-				<textarea id="description" class="form-control"
-					th:field="*{description}" required></textarea>
-			</div>
+				<!-- Description Field -->
+				<div class="mb-3">
+					<label for="description" class="form-label">Description</label>
+					<textarea id="description" class="form-control"
+						th:field="*{description}" required></textarea>
+				</div>
 
-			<!-- Submit Button -->
-			<div class="mb-3">
-				<input type="submit" value="Save Changes"
-					class="btn btn-primary rounded-pill" />
-			</div>
+				<!-- Submit Button -->
+				<div class="mb-3">
+					<input type="submit" value="Save Changes"
+						class="btn btn-primary rounded-pill" />
+				</div>
 
-		</form>
+			</form>
+		</div>
 	</div>
 
 	<script src="/js/bootstrap.bundle.min.js"
