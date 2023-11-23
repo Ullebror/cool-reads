@@ -2,11 +2,11 @@
 
 ## Issues
 
-- The Spring Boot application won't start on my computer.
-- I always have conflicts when I try to pull code from the GitHub.
+- The tasks weren't decided together.
+- Issues weren't closed on GitHub.
+- Our backlog wasn't updated properly after issues had been completed.
 
 ## Actions
 
-- Fix the broken Spring Boot setups together.
-- Pull code from GitHub more often.
-- Create smaller commits and push code to GitHub more often.
+- In the next sprint, we will discuss the issues as a group and divide the tasks then.
+- Everyone remembers to keep up with issues, and moves them to In Progress and when completed, closes them and moves them to the Done section.
