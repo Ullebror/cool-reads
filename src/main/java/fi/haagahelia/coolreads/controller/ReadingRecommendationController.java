@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import fi.haagahelia.coolreads.model.Recommendation;
 import fi.haagahelia.coolreads.repository.ReadingRecommendationRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -44,6 +45,13 @@ public class ReadingRecommendationController {
 		List<Recommendation> recommendations = readingRepository.findAll();
 		model.addAttribute("recommendations", recommendations);
 		return "recommendationlist";
+	}
+	
+	@GetMapping("/createdDate")
+	public String listRecommendationByDateCreatedDesc(Model model) {
+	    List<Recommendation> recommendations = readingRepository.findAllByOrderByCreationDateDesc();
+	    model.addAttribute("recommendations", recommendations);
+	    return "recommendationlist";
 	}
 	
 	@GetMapping("/edit/{id}")

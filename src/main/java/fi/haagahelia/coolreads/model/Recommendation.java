@@ -1,5 +1,9 @@
 package fi.haagahelia.coolreads.model;
 
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,11 +30,15 @@ public class Recommendation {
 	@Column(nullable = false)
 	@NotBlank
 	private String description;
+	
+	@CreationTimestamp
+	@Column(nullable = false, updatable = false)
+    private LocalDateTime creationDate;
 
 	public Recommendation() {
 	}
 
-	public Recommendation(String title, String link, String description) {
+	public Recommendation(String title, String link, String description, LocalDateTime creationDate) {
 		this.title = title;
 		this.link = link;
 		this.description = description;
@@ -67,4 +75,8 @@ public class Recommendation {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
 }
