@@ -39,6 +39,16 @@
 					<textarea id="description" class="form-control"
 						th:field="*{description}" required></textarea>
 				</div>
+				
+				<!--  Category Field -->
+				<div class="mb-3">
+					<label for="category" class="form-label">Category</label>
+					<select id="category" th:field="*{category}" class="form-control">
+						<option th:each="category: ${categories}" 
+								th:value="${category.id}"
+								th:text="${category.name}"></option>
+					</select>
+				</div>
 
 				<!-- Submit Button -->
 				<div class="mb-3">

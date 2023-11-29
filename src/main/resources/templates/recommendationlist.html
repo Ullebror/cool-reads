@@ -11,7 +11,8 @@
 				<th>Link</th>
 				<th>Description</th>
 				<th>Added on</th>
-				<th>Actions</th>
+				<th>Category</th>
+				<th>Actions</th>	
 			</tr>
 			<tr th:each="recommendation : ${recommendations}">
 				<td th:text="${recommendation.title}"></td>
@@ -19,6 +20,8 @@
 					th:href="@{${recommendation.link}}"></a></td>
 				<td th:text="${recommendation.description}"></td>
 				<td th:text="${#temporals.format(recommendation.creationDate, 'dd MMM yyyy HH:mm')}"></td>
+				<!-- the ? in the next line is to access null values -->
+				<td th:text="${recommendation.category?.name}"></td>
 				<td><a th:href="@{/edit/{id}(id=${recommendation.id})}"
 					class="btn btn-primary btn-xs">Edit</a></td>
 				<td>

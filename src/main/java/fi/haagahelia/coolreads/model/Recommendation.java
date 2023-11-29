@@ -8,6 +8,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
@@ -30,10 +32,14 @@ public class Recommendation {
 	@Column(nullable = false)
 	@NotBlank
 	private String description;
-	
+
 	@CreationTimestamp
 	@Column(nullable = false, updatable = false)
-    private LocalDateTime creationDate;
+	private LocalDateTime creationDate;
+
+	@ManyToOne
+	@JoinColumn(name = "categoryid")
+	private Category category;
 
 	public Recommendation() {
 	}
@@ -75,8 +81,17 @@ public class Recommendation {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	public LocalDateTime getCreationDate() {
-        return creationDate;
-    }
+		return creationDate;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
 }
