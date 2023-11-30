@@ -25,15 +25,27 @@ public class CategoryController {
 		@GetMapping("/addcategory")
 		public String addCategory(Model model) {
 			model.addAttribute("category", new Category());
+			model.addAttribute("errormessage", "");
 			log.info("form");
 			return "addcategory";
+		}
+		
+		@GetMapping("/categorylist")
+		public String listCategory(Model model) {
+			model.addAttribute("categories", categoryRepository.findAll());
+			
+			return "categorylist";
 		}
 
 		// Save new recommendation
 		@RequestMapping(value = "/addcategory", method = RequestMethod.POST)
-		public String saveCategory(@ModelAttribute("category") Category category) {
-		    categoryRepository.save(category);
-		    return "redirect:/";
+		public String saveCategoryOrRedirect(@ModelAttribute("category") Category category, Model model) {
+			if (categoryRepository.findByName(category.getName()) != null) {
+				model.addAttribute("errormessage", "This category already exists.");
+				return "addcategory";
+			}
+			    categoryRepository.save(category);
+			    return "redirect:/";
 		}
 
 }
