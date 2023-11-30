@@ -28,6 +28,14 @@
 				<small class="text-danger"
 					th:if="${#fields.hasErrors('description')}"
 					th:errors="*{description}"></small>
+					<div class="mb-3">
+				<label for="category" class="form-label">Category</label>
+					<select id="category" th:field="*{category}" class="form-control">
+						<option th:each="category: ${categories}" 
+								th:value="${category.id}"
+								th:text="${category.name}"></option>
+					</select>
+				</div>
 			</div>
 			<input type="submit" class="btn btn-primary" value="Add" /> <a
 				href="/" class="btn btn-secondary">Cancel</a>
