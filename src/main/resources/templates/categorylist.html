@@ -4,8 +4,10 @@
 <body>
 	<div layout:fragment="content">
 		<h1>Categories</h1>
-
-		
+ <ul>
+        <li th:each="category : ${categories}" th:text="${category.name}">Category Name</li>
+    </ul>
+    <a class="btn btn-primary" href="/addcategory">Add category </a>
 	</div>
 </body>
 </html>
