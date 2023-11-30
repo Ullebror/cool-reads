@@ -2,6 +2,8 @@ package fi.haagahelia.coolreads.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,7 +22,8 @@ public class Category {
 	@NotBlank
 	private String name;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL, mappedBy= "category")
 	private List<Recommendation> recommendations;
 
 	public Category() {
@@ -54,5 +57,11 @@ public class Category {
 	public void setRecommendations(List<Recommendation> recommendations) {
 		this.recommendations = recommendations;
 	}
+	
+	@Override
+	public String toString() {
+		return "Category [id=" + id + ", name=" + name + "]";
+	}
+	
 
 }

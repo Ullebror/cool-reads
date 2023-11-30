@@ -38,7 +38,7 @@ public class Recommendation {
 	private LocalDateTime creationDate;
 
 	@ManyToOne
-	@JoinColumn(name = "categoryid")
+	@JoinColumn(name = "categoryid", referencedColumnName = "id")
 	private Category category;
 
 	public Recommendation() {
