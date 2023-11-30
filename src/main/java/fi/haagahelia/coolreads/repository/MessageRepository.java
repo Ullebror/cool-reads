@@ -1,9 +1,10 @@
 package fi.haagahelia.coolreads.repository;
 
-import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+
 import fi.haagahelia.coolreads.model.Message;
 
-@Repository
+@RepositoryRestResource
 public interface MessageRepository extends JpaRepository<Message, Long> {
 }
