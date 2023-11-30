@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import fi.haagahelia.coolreads.model.Recommendation;
 import fi.haagahelia.coolreads.repository.ReadingRecommendationRepository;
+import fi.haagahelia.coolreads.repository.CategoryRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,13 +23,16 @@ import java.util.List;
 public class ReadingRecommendationController {
 	@Autowired
 	private ReadingRecommendationRepository readingRepository;
-	
+	@Autowired
+	private CategoryRepository categoryRepository;
+		
 	private static final Logger log = LoggerFactory.getLogger(ReadingRecommendationController.class);
 
 	// Add new recommendation
 	@GetMapping("/add")
 	public String addRecommendation(Model model) {
 		model.addAttribute("recommendation", new Recommendation());
+		model.addAttribute("categories", categoryRepository.findAll()); 
 		log.info("form");
 		return "addrecommendation";
 	}
@@ -56,7 +60,9 @@ public class ReadingRecommendationController {
 	
 	@GetMapping("/edit/{id}")
 	 public String editReadingRecommendation(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("categories", categoryRepository.findAll()); 
 		 Recommendation recommendation = readingRepository.findById(id).orElse(null);
+		 
 		 if (recommendation != null) {
 			 model.addAttribute("recommendation", recommendation);
 	         return "editrecommendation";
