@@ -11,8 +11,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@NoArgsConstructor
+@Getter
+@Setter
 public class Category {
 	@Id
 	@GeneratedValue
@@ -25,10 +31,6 @@ public class Category {
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy= "category")
 	private List<Recommendation> recommendations;
-
-	public Category() {
-
-	}
 
 	public Category(String name) {
 		this.name = name;

@@ -12,8 +12,14 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@NoArgsConstructor
+@Getter
+@Setter
 public class Recommendation {
 	@Id
 	@GeneratedValue
@@ -40,9 +46,6 @@ public class Recommendation {
 	@ManyToOne
 	@JoinColumn(name = "categoryid", referencedColumnName = "id")
 	private Category category;
-
-	public Recommendation() {
-	}
 
 	public Recommendation(String title, String link, String description, LocalDateTime creationDate) {
 		this.title = title;
