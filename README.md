@@ -22,3 +22,8 @@ This Project requires Java version 17
 
 - [Product Backlog](https://github.com/orgs/Airplane-2/projects/1)
 - [Sprint 1 Backlog](https://github.com/orgs/Airplane-2/projects/3)
+- [Sprint 2 Backlog](https://github.com/orgs/Airplane-2/projects/4)
+
+## Documentation
+
+- [Swagger documentation](http://localhost:8080/swagger-ui.html)
