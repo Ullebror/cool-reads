@@ -1,38 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout.html}">
-<body>
-	<div layout:fragment="content">
-		<h1>Reading recommendations</h1>
-
-		<table class="table">
-			<tr>
-				<th>Title</th>
-				<th>Link</th>
-				<th>Description</th>
-				<th>Added on</th>
-				<th>Category</th>
-				<th>Actions</th>	
-			</tr>
-			<tr th:each="recommendation : ${recommendations}">
-				<td th:text="${recommendation.title}"></td>
-				<td><a th:text="${recommendation.link}"
-					th:href="@{${recommendation.link}}"></a></td>
-				<td th:text="${recommendation.description}"></td>
-				<td th:text="${#temporals.format(recommendation.creationDate, 'dd MMM yyyy HH:mm')}"></td>
-				<!-- the ? in the next line is to access null values -->
-				<td th:text="${recommendation.category?.name}"></td>
-				<td><a th:href="@{/edit/{id}(id=${recommendation.id})}"
-					class="btn btn-primary btn-xs">Edit</a></td>
-				<td>
-					<!-- Delete Button --> <a
-					th:href="@{/delete/{id}(id=${recommendation.id})}"
-					class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
-				</td>
-			</tr>
-		</table>
-
-		<a class="btn btn-primary" href="/add">Add a Reading recommendation </a>
-	</div>
-</body>
+<html
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout.html}"
+>
+  <head>
+    <script th:src="@{/frontend/renderRecommendationList.js}" defer></script>
+  </head>
+  <body>
+    <div layout:fragment="content">
+      <div id="recommendationListRoot"></div>
+    </div>
+  </body>
 </html>
