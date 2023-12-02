@@ -13,7 +13,7 @@ export default function RecommendationListItem(props) {
             </form>
         </td>
         
-        <td> <form method="POST" action={`/recommendations/${props.recommendation.id}/delete`}>
+        <td> <form method="GET" action={`/delete/${props.recommendation.id}`}>
             <button className="btn btn-danger">Delete</button>
             </form>
         </td>
