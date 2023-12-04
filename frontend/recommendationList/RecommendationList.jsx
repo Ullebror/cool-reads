@@ -9,25 +9,41 @@ export default function RecommendationList() {
   const [selectedCategoryId, setSelectedCategoryId] = useState("any");
   const [recommendations, setRecommendations] = useState([]);
 
-  useEffect (() => {
-    fetchCategories().then((fetchedCategories) => setCategories(fetchedCategories));
-
+  useEffect(() => {
+    fetchCategories().then((fetchedCategories) =>
+      setCategories(fetchedCategories)
+    );
   }, []);
 
   useEffect(() => {
     if (selectedCategoryId !== "any") {
-      
-      fetchRecommendationbyCategoryId(selectedCategoryId).then((fetchedRecommendations) => setRecommendations(fetchedRecommendations));
-
+      fetchRecommendationbyCategoryId(selectedCategoryId).then(
+        (fetchedRecommendations) => setRecommendations(fetchedRecommendations)
+      );
     } else {
-      fetchRecommendations().then((fetchedRecommendations) => setRecommendations(fetchedRecommendations));
+      fetchRecommendations().then((fetchedRecommendations) =>
+        setRecommendations(fetchedRecommendations)
+      );
     }
-    
   }, [selectedCategoryId]);
 
   function handleCategoryFilterChange(event) {
     setSelectedCategoryId(event.target.value);
   }
+
+  const handleDelete = (deleteRecommendation) => {
+    if (window.confirm(`Delete reading recommendation "${deleteRecommendation.title}"?`)) {
+      fetch(`/delete/${deleteRecommendation.id}`, {method: 'GET'})
+      .then(response => {
+        if(response.ok){
+          setRecommendations(recommendations.filter((recommendation) => recommendation.id !== deleteRecommendation.id))
+        } else {
+          throw new Error("error in deletion: " + response.statusText);
+        }
+      })
+      .catch(err => console.error(err));
+    }
+  };
 
   return (
     <div>
@@ -50,24 +66,23 @@ export default function RecommendationList() {
 
       <table className="table">
         <tbody>
-            <tr>
-                <th>Title</th>
-                <th>Link</th>
-                <th>Description</th>
-                <th>Added on</th>
-                <th>Category</th>
-                <th>Actions</th>
-            </tr>
-            {recommendations.map((recommendation) => (
-                <RecommendationListItem recommendation={recommendation} key={recommendation.id} />
-            ))}
+          <tr>
+            <th>Title</th>
+            <th>Link</th>
+            <th>Description</th>
+            <th>Added on</th>
+            <th>Category</th>
+            <th>Actions</th>
+          </tr>
+          {recommendations.map((recommendation) => (
+            <RecommendationListItem
+              recommendation={recommendation}
+              key={recommendation.id}
+              handleDelete={handleDelete}
+            />
+          ))}
         </tbody>
       </table>
-
-      
-       
-      
-
       <a className="btn btn-primary" href="/add">
         Add a recommendation
       </a>
