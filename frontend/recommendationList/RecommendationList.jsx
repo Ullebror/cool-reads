@@ -33,7 +33,7 @@ export default function RecommendationList() {
 
   const handleDelete = (deleteRecommendation) => {
     if (window.confirm(`Delete reading recommendation "${deleteRecommendation.title}"?`)) {
-      fetch(`/delete/${deleteRecommendation.id}`, {method: 'GET'})
+      fetch(`/delete/${deleteRecommendation.id}`, {method: 'POST'})
       .then(response => {
         if(response.ok){
           setRecommendations(recommendations.filter((recommendation) => recommendation.id !== deleteRecommendation.id))
