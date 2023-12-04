@@ -4,6 +4,8 @@ Cool Reads is a web application developed as part of a Scrum team project. The a
 
 ## Usage Guide
 
+The application can be used by clicking on [the following link](https://cool-reads-airplane2.onrender.com/)
+
 This Project requires Java version 17
 
 1. Clone the repository
