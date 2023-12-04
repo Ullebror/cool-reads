@@ -25,14 +25,14 @@ public class ReadingRecommendationController {
 	private ReadingRecommendationRepository readingRepository;
 	@Autowired
 	private CategoryRepository categoryRepository;
-		
+
 	private static final Logger log = LoggerFactory.getLogger(ReadingRecommendationController.class);
 
 	// Add new recommendation
 	@GetMapping("/add")
 	public String addRecommendation(Model model) {
 		model.addAttribute("recommendation", new Recommendation());
-		model.addAttribute("categories", categoryRepository.findAll()); 
+		model.addAttribute("categories", categoryRepository.findAll());
 		log.info("form");
 		return "addrecommendation";
 	}
@@ -40,8 +40,8 @@ public class ReadingRecommendationController {
 	// Save new recommendation
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String saveRecommendation(@ModelAttribute("recommendation") Recommendation recommendation) {
-	    readingRepository.save(recommendation);
-	    return "redirect:/";
+		readingRepository.save(recommendation);
+		return "redirect:/";
 	}
 
 	@GetMapping("/")
@@ -50,35 +50,36 @@ public class ReadingRecommendationController {
 		model.addAttribute("recommendations", recommendations);
 		return "recommendationlist";
 	}
-	
+
 	@GetMapping("/createdDate")
 	public String listRecommendationByDateCreatedDesc(Model model) {
-	    List<Recommendation> recommendations = readingRepository.findAllByOrderByCreationDateDesc();
-	    model.addAttribute("recommendations", recommendations);
-	    return "recommendationlist";
+		List<Recommendation> recommendations = readingRepository.findAllByOrderByCreationDateDesc();
+		model.addAttribute("recommendations", recommendations);
+		return "recommendationlist";
 	}
-	
-	@GetMapping("/edit/{id}")
-	 public String editReadingRecommendation(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("categories", categoryRepository.findAll()); 
-		 Recommendation recommendation = readingRepository.findById(id).orElse(null);
-		 
-		 if (recommendation != null) {
-			 model.addAttribute("recommendation", recommendation);
-	         return "editrecommendation";
-	     } else {
-	         return "redirect:/";
-	     }
-	 }
 
-	 @PostMapping("/saveEditedReadingRecommendation")
-	 public String saveEditedBook(@ModelAttribute Recommendation recommendationForm) {
-		 readingRepository.save(recommendationForm);
-	     return "redirect:/";
-	 }
-	 @GetMapping("/delete/{id}")
-	 public String deleteRecommendation(@PathVariable("id") Long id, Model model) {
-	     readingRepository.deleteById(id);
-	     return "redirect:/";
-	 }
+	@GetMapping("/edit/{id}")
+	public String editReadingRecommendation(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("categories", categoryRepository.findAll());
+		Recommendation recommendation = readingRepository.findById(id).orElse(null);
+
+		if (recommendation != null) {
+			model.addAttribute("recommendation", recommendation);
+			return "editrecommendation";
+		} else {
+			return "redirect:/";
+		}
+	}
+
+	@PostMapping("/saveEditedReadingRecommendation")
+	public String saveEditedBook(@ModelAttribute Recommendation recommendationForm) {
+		readingRepository.save(recommendationForm);
+		return "redirect:/";
+	}
+
+	@GetMapping("/delete/{id}")
+	public String deleteRecommendation(@PathVariable("id") Long id, Model model) {
+		readingRepository.deleteById(id);
+		return "redirect:/";
+	}
 }

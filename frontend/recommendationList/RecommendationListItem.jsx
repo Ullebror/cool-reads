@@ -18,7 +18,7 @@ export default function RecommendationListItem(props) {
       <td>{formattedDate}</td>
       <td>{props.recommendation.category.name}</td>
       <td>
-        <button className="btn btn-primary btn-xs">Edit</button>
+        <a className="btn btn-primary btn-xs" href={`/edit/${props.recommendation.id}`}>Edit</a>
       </td>
       <td>
         <button
