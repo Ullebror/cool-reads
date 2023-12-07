@@ -12,6 +12,9 @@ This Project requires Java version 17
 2. Open Git Bash in the folder of the project
 3. Run the following command: `./mvnw spring-boot:run`
 4. Open your browser and navigate to [localhost:8080](https://localhost:8080/)
+5. You can download the SNAPSHOT java -jar file from the Sprint 2 release
+6. After downloading it, Git Bash in the folder where the file is located
+7. Run the following command: `java -jar cool-reads-0.0.1-SNAPSHOT.jar`
 
 ## Team members
 
