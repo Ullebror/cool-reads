@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout.html}">
+<head>
+<title>Sign Up</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="container mt-5 bold-text">
+			<h1>Sign-up</h1>
+			<div class="col-md-4">
+				<form th:action="@{/saveuser}" th:object="${signupform}"
+					method="post">
+					<div class="mb-3">
+						<label> User name: <input type="text"
+							th:field="*{username}" class="form-control" />
+						</label>
+						<p th:if="${#fields.hasErrors('username')}"
+							th:errors="*{username}">User name Error</p>
+					</div>
+					<div class="mb-3">
+						<label> Password: <input type="password"
+							th:field="*{password}" class="form-control" />
+						</label>
+						<p th:if="${#fields.hasErrors('password')}"
+							th:errors="*{password}">Password Error</p>
+					</div>
+					<div class="mb-3">
+						<label> Re-type Password: <input type="password"
+							th:field="*{passwordCheck}" class="form-control" />
+						</label>
+						<p th:if="${#fields.hasErrors('passwordCheck')}"
+							th:errors="*{passwordCheck}">Password Match Error</p>
+					</div>
+					<div class="mb-3">
+						<input type="submit" class="btn btn-primary rounded-pill"
+							value="Signup" />
+					</div>
+				</form>
+				<!-- Login Link -->
+				<div class="registration">
+					<p>
+						If you want to return <a th:href="@{/login}">login</a>.
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

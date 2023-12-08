@@ -13,20 +13,21 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests((requests) -> requests.requestMatchers(antMatcher("/"), antMatcher("/register"),
-                                antMatcher("/categorylist"), antMatcher("/frontend/**"), antMatcher("/api/**"), antMatcher("/error")).permitAll().anyRequest()
-                                .authenticated());
+	@Bean
+	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		http.authorizeHttpRequests((requests) -> requests
+				.requestMatchers(antMatcher("/"), antMatcher("/signup"), antMatcher("/categorylist"),
+						antMatcher("/frontend/**"), antMatcher("/api/**"), antMatcher("/error"))
+				.permitAll().anyRequest().authenticated());
 
-        http.formLogin((form) -> form.permitAll());
-        http.logout((logout) -> logout.permitAll());
+		http.formLogin((form) -> form.permitAll());
+		http.logout((logout) -> logout.permitAll());
 
-        return http.build();
-    }
+		return http.build();
+	}
 }
