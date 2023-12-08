@@ -22,10 +22,10 @@
 					</div>
 					<div class="mb-3">
 						<label> Password: <input type="password"
-							th:field="*{password}" class="form-control" />
+							th:field="*{password_hash}" class="form-control" />
 						</label>
-						<p th:if="${#fields.hasErrors('password')}"
-							th:errors="*{password}">Password Error</p>
+						<p th:if="${#fields.hasErrors('password_hash')}"
+							th:errors="*{password_hash}">Password Error</p>
 					</div>
 					<div class="mb-3">
 						<label> Re-type Password: <input type="password"
