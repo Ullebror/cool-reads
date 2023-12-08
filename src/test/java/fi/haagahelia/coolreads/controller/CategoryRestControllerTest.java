@@ -16,13 +16,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import fi.haagahelia.coolreads.model.Category;
+import fi.haagahelia.coolreads.model.Recommendation;
 import fi.haagahelia.coolreads.repository.CategoryRepository;
+import fi.haagahelia.coolreads.repository.ReadingRecommendationRepository;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 public class CategoryRestControllerTest {
 	@Autowired
 	CategoryRepository categoryRepository;
+	
+	@Autowired
+	ReadingRecommendationRepository recommendationRepository;
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -57,6 +62,34 @@ public class CategoryRestControllerTest {
 		.andExpect(jsonPath("$[2].id").value(secondCategory.getId()))
 		.andExpect(jsonPath("$[0].name").value("Miscellaneous"))
 		.andExpect(jsonPath("$[0].id").value(thirdCategory.getId()));
+	}
+	
+	@Test
+	public void getRecommendationsByCategoryIdReturnsEmptyListWhenCategoryDoesNotHaveRecommendations() throws Exception {
+		Category firstCategory = new Category("Scrum Guides");
+		categoryRepository.save(firstCategory);
+		this.mockMvc.perform(get("/api/categories/"+ firstCategory.getId() + "/recommendations"))
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("$", hasSize(0)));
+	}
+	
+	@Test
+	public void getRecommendationsByCategoryIdReturnsListOfRecommendationsWhenCategoryHasRecommendations() throws Exception {
+		Category category = new Category("Scrum Guides");
+		Recommendation firstRecommendation = new Recommendation("The Scrum Guide 2020", "https://scrumguides.org/scrum-guide.html", "All you need to know about Scrum", category);
+		Recommendation secondRecommendation = new Recommendation("What is Scrum?", "https://www.scrum.org/resources/what-scrum-module", "A deep dive to Scrum", category);
+		categoryRepository.save(category);
+		recommendationRepository.saveAll(List.of(firstRecommendation, secondRecommendation));
+		
+		this.mockMvc.perform(get("/api/categories/" + category.getId() + "/recommendations"))
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("$", hasSize(2)));
+	}
+	
+	@Test
+	public void getRecommendationsByCategoryIdReturnsNotFoundWhenCategoryDoesNotExist() throws Exception {
+		this.mockMvc.perform(get("/api/categories/1/recommendations"))
+		.andExpect(status().isNotFound());
 	}
 
 }
