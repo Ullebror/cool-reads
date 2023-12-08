@@ -49,10 +49,11 @@ public class Recommendation {
 	@NotNull
 	private Category category;
 
-	public Recommendation(String title, String link, String description, LocalDateTime creationDate) {
+	public Recommendation(String title, String link, String description, Category category) {
 		this.title = title;
 		this.link = link;
 		this.description = description;
+		this.category = category;
 	}
 
 }
