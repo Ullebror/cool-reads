@@ -8,13 +8,18 @@ The application can be used by clicking on [the following link](https://cool-rea
 
 This Project requires Java version 17
 
+### To open the application
+
 1. Clone the repository
-2. Open Git Bash in the folder of the project
-3. Run the following command: `./mvnw spring-boot:run`
-4. Open your browser and navigate to [localhost:8080](https://localhost:8080/)
-5. You can download the SNAPSHOT java -jar file from the Sprint 2 release
-6. After downloading it, Git Bash in the folder where the file is located
-7. Run the following command: `java -jar cool-reads-0.0.1-SNAPSHOT.jar`
+2. You can download the SNAPSHOT java -jar file from the Sprint 2 release
+3. After downloading it, navigate to the folder where the file is located and go to target, and Git Bash there
+4. Run the following command: `java -jar cool-reads-0.0.1-SNAPSHOT.jar`
+5. Open your browser and navigate to [localhost:8080](https://localhost:8080/)
+
+### To run tests
+
+1. Git Bash in the folder where the cloned repository is located in
+2. Run the following command: `./mvnw test`
 
 ## Team members
 

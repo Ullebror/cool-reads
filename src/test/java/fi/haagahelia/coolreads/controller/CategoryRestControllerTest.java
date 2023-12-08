@@ -46,6 +46,22 @@ public class CategoryRestControllerTest {
 	}
 	
 	@Test
+	public void getCategoryByIdAndReturnsNotFoundWhenCategoryDoesNotExist() throws Exception {
+		this.mockMvc.perform(get("/api/categories/1"))
+		.andExpect(status().isNotFound());
+		
+	}
+	
+	@Test
+	public void getCategoryByIdAndReturnsCategoryWhenCategoryExist() throws Exception {
+		Category category = new Category("Scrum Guides");
+		categoryRepository.save(category);
+		
+		this.mockMvc.perform(get("/api/categories/" + category.getId()))
+		.andExpect(status().isOk());
+	}
+	
+	@Test
 	public void getCategoriesReturnsListOfCategoriesWhenCategoriesExist() throws Exception {
 		Category firstCategory = new Category("Scrum Guides");
 		Category secondCategory = new Category("Video Game News");
