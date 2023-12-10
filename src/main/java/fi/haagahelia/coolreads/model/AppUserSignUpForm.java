@@ -1,6 +1,7 @@
 package fi.haagahelia.coolreads.model;
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,11 +16,13 @@ public class AppUserSignUpForm {
 	private String username = "";
 
 	@NotEmpty(message = "Password is required")
-	@Size(min = 6, message = "Password must have at least 6 characters")
+	@Size(min = 8, message = "Password must have at least 6 characters")
+	@Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]+$", message = "Paasword must contain at least one letter and one number")
 	private String password_hash = "";
 
 	@NotEmpty(message = "Password is required")
-	@Size(min = 6, message = "Password must have at least 6 characters")
+	@Size(min = 8, message = "Password must have at least 6 characters")
+	@Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]+$", message = "Paasword must contain at least one letter and one number")
 	private String passwordCheck = "";
 
 	@NotEmpty
