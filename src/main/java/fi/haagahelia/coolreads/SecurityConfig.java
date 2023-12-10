@@ -20,10 +20,9 @@ public class SecurityConfig {
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.authorizeHttpRequests((requests) -> requests
-				.requestMatchers(antMatcher("/"), antMatcher("/signup"), antMatcher("/categorylist"),
-						antMatcher("/frontend/**"), antMatcher("/api/**"), antMatcher("/error"))
-				.permitAll().anyRequest().authenticated());
+		http.authorizeHttpRequests((requests) -> requests.requestMatchers(antMatcher("/"), antMatcher("/signup"),
+				antMatcher("/register"), antMatcher("/categorylist"), antMatcher("/frontend/**"), antMatcher("/api/**"),
+				antMatcher("/error")).permitAll().anyRequest().authenticated());
 
 		http.formLogin((form) -> form.permitAll());
 		http.logout((logout) -> logout.permitAll());

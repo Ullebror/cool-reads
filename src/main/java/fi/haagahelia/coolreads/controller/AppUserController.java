@@ -16,14 +16,14 @@ import jakarta.validation.Valid;
 
 @Controller
 public class AppUserController {
-	
+
 	@Autowired
 	private AppUserRepository appUserRepository;
-	
+
 	// log in form
 	@GetMapping("/register")
 	public String registerForm(Model model) {
-		return "register";
+		return "registration";
 	}
 
 	// sign up form
@@ -32,10 +32,11 @@ public class AppUserController {
 		model.addAttribute("signupform", new AppUserSignUpForm());
 		return "signup";
 	}
-	
+
 	// save user
 	@PostMapping("/saveuser")
-	public String saveAppUser(@Valid @ModelAttribute("signupform") AppUserSignUpForm signUpForm, BindingResult bindingResult) {
+	public String saveAppUser(@Valid @ModelAttribute("signupform") AppUserSignUpForm signUpForm,
+			BindingResult bindingResult) {
 		if (!bindingResult.hasErrors()) { // validation errors
 			if (signUpForm.getPassword_hash().equals(signUpForm.getPasswordCheck())) { // check password match
 				String pwd = signUpForm.getPassword_hash();
@@ -62,6 +63,5 @@ public class AppUserController {
 		}
 		return "redirect:/register";
 	}
-	
-	
+
 }
