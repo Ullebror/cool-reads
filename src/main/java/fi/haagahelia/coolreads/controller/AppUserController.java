@@ -23,7 +23,7 @@ public class AppUserController {
 	// log in form
 	@GetMapping("/register")
 	public String registerForm(Model model) {
-		return "registration";
+		return "login";
 	}
 
 	// sign up form
@@ -61,7 +61,7 @@ public class AppUserController {
 		} else {
 			return "signup";
 		}
-		return "redirect:/register";
+		return "redirect:/login";
 	}
 
 }
