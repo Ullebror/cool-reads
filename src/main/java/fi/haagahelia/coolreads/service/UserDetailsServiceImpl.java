@@ -1,4 +1,4 @@
-/*package fi.haagahelia.coolreads;
+package fi.haagahelia.coolreads.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -7,19 +7,45 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import fi.haagahelia.coolreads.model.AppUser;
+import fi.haagahelia.coolreads.repository.AppUserRepository;
+
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-    @Autowired
-    private UserRepository userRepository;
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findOneByUsername(username)
-                        .orElseThrow(() -> new UsernameNotFoundException(username));
-
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPasswordHash(),
-                    AuthorityUtils.createAuthorityList(user.getRole()));
-    }
-    
+	private final AppUserRepository repository;
+ 
+	@Autowired
+	public UserDetailsServiceImpl(AppUserRepository userRepository) {
+		this.repository = userRepository;
+	}
+ 
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// Fetching the user from the repository
+		AppUser curruser = repository.findByUsername(username);
+		// Creating UserDetails object with user information
+		UserDetails user = new org.springframework.security.core.userdetails.User(username, curruser.getPassword_hash(),
+				AuthorityUtils.createAuthorityList(curruser.getRole()));
+		return user;
+	}
 }
-*/
+/*@Service
+public class UserDetailsServiceImpl implements UserDetailsService {
+    @Autowired
+    private AppUserRepository userRepository;
+    
+    
+
+    /* @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    	
+    	
+    	
+        AppUser user = userRepository.findByUsername(username);
+                        //.orElseThrow(() -> new UsernameNotFoundException(username));
+
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword_hash(),
+                    AuthorityUtils.createAuthorityList(user.getRole()));
+    } 
+    
+}*/
