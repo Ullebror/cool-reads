@@ -33,15 +33,19 @@ export default function RecommendationList() {
 
 	const handleDelete = (deleteRecommendation) => {
 		if (window.confirm(`Delete reading recommendation "${deleteRecommendation.title}"?`)) {
-			fetch(`/delete/${deleteRecommendation.id}`, { method: 'POST' })
-				.then(response => {
-					if (response.ok) {
-						setRecommendations(recommendations.filter((recommendation) => recommendation.id !== deleteRecommendation.id))
-					} else {
-						throw new Error("error in deletion: " + response.statusText);
-					}
-				})
-				.catch(err => console.error(err));
+			fetch(`/delete/${deleteRecommendation.id}`, {
+				method: 'POST',
+				headers: {
+					"X-CSRF-TOKEN": document.getElementById("_csrf").getAttribute("content"),
+				},
+			}).then(response => {
+				if (response.ok) {
+					setRecommendations(recommendations.filter((recommendation) => recommendation.id !== deleteRecommendation.id))
+				} else {
+					throw new Error("error in deletion: " + response.statusText);
+				}
+			})
+			.catch(err => console.error(err));
 		}
 	};
 
