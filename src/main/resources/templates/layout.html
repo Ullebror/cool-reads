@@ -43,7 +43,10 @@
 					<div class="me-2">
 						Signed in as <span sec:authentication="name"></span>
 					</div>
-					<a href="/logout" class="btn btn-secondary">Sign out</a>
+					<form class="ml-auto mr-1" th:action="@{/logout}" method="post">
+						<input class="btn btn-secondary" type="submit" value="Sign Out" />
+					</form>
+					
 				</div>
 			</div>
 		</div>
