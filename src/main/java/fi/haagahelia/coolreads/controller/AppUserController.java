@@ -21,7 +21,7 @@ public class AppUserController {
 	private AppUserRepository appUserRepository;
 
 	// log in form
-	@GetMapping("/register")
+	@GetMapping("/login")
 	public String registerForm(Model model) {
 		return "login";
 	}
