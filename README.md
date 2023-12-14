@@ -38,3 +38,7 @@ This Project requires Java version 17
 ## Documentation
 
 - [Swagger documentation](http://localhost:8080/swagger-ui.html)
+
+## License
+
+Cool-reads is [MIT licensed](https://github.com/Airplane-2/cool-reads/blob/main/LICENSE.md).
