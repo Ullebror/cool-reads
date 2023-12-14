@@ -1,5 +1,9 @@
 package fi.haagahelia.coolreads.model;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +27,10 @@ public class AppUser {
 
 	@Column(name = "role", nullable = false)
 	private String role;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "user")
+	private List<Recommendation> recommendations;
 
 	public AppUser(String username, String password_hash, String role) {
 		super();

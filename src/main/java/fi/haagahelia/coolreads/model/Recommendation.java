@@ -48,6 +48,10 @@ public class Recommendation {
 	@JoinColumn(name = "categoryid", referencedColumnName = "id")
 	@NotNull
 	private Category category;
+	
+	@ManyToOne
+	@JoinColumn(name = "user_id", nullable = true)
+	private AppUser user;
 
 	public Recommendation(String title, String link, String description, Category category) {
 		this.title = title;
