@@ -48,7 +48,7 @@ public class Recommendation {
 	@JoinColumn(name = "categoryid", referencedColumnName = "id")
 	@NotNull
 	private Category category;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = true)
 	private AppUser user;
@@ -59,6 +59,17 @@ public class Recommendation {
 		this.description = description;
 		this.category = category;
 		this.user = user;
+	}
+
+	public Recommendation(Long id, @NotBlank String title, @NotBlank @Pattern(regexp = "^(https?://.+)$") String link,
+			@NotBlank String description, LocalDateTime creationDate, @NotNull Category category) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.link = link;
+		this.description = description;
+		this.creationDate = creationDate;
+		this.category = category;
 	}
 
 }
