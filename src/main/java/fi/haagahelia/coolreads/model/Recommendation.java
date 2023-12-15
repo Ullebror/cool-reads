@@ -53,11 +53,12 @@ public class Recommendation {
 	@JoinColumn(name = "user_id", nullable = true)
 	private AppUser user;
 
-	public Recommendation(String title, String link, String description, Category category) {
+	public Recommendation(String title, String link, String description, Category category, AppUser user) {
 		this.title = title;
 		this.link = link;
 		this.description = description;
 		this.category = category;
+		this.user = user;
 	}
 
 }
