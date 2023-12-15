@@ -21,15 +21,6 @@ export default function RecommendationListItem(props) {
       setShowButtons(false);
     }
   }, [props.currUser, props.recommendation.user]);
-  /* if (props.currUser != null) {
-    if (props.currUser.username === props.recommmendation.user.username) {
-      setShowButtons(true)
-    } else {
-      setShowButtons(false)
-    }
-  } else {
-    setShowButtons(false)
-  } */
 
   return (
     <tr key={props.recommendation.id}>
