@@ -37,6 +37,7 @@ This Project requires Java version 17
 
 ## Documentation
 
+- [Final report](https://github.com/Airplane-2/cool-reads/blob/main/documentation/final-report.md)
 - [Swagger documentation](http://localhost:8080/swagger-ui.html)
 
 ## License
