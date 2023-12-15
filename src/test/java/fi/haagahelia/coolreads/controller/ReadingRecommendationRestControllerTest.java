@@ -13,8 +13,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.hamcrest.Matchers.*;
 
+import fi.haagahelia.coolreads.repository.AppUserRepository;
 import fi.haagahelia.coolreads.repository.CategoryRepository;
 import fi.haagahelia.coolreads.repository.ReadingRecommendationRepository;
+import fi.haagahelia.coolreads.model.AppUser;
 import fi.haagahelia.coolreads.model.Category;
 import fi.haagahelia.coolreads.model.Recommendation;
 
@@ -25,6 +27,8 @@ public class ReadingRecommendationRestControllerTest {
 	ReadingRecommendationRepository recommendationRepository;
 	@Autowired
 	CategoryRepository categoryRepository;
+	@Autowired
+	AppUserRepository userRepository;
 	
 	@Autowired
 	private MockMvc mockMvc;
@@ -34,6 +38,7 @@ public class ReadingRecommendationRestControllerTest {
 		//deletes everything from the repositories before tests.
 		recommendationRepository.deleteAll();
 		categoryRepository.deleteAll();
+		userRepository.deleteAll();
 	}
 	
 	@Test
@@ -46,9 +51,11 @@ public class ReadingRecommendationRestControllerTest {
 	@Test
 	public void getRecommendationsReturnsListOfRecommendationsWhenRecommendationsExist() throws Exception {
 		Category category = new Category("Scrum Guides");
-		Recommendation firstRecommendation = new Recommendation("The Scrum Guide 2020", "https://scrumguides.org/scrum-guide.html", "All you need to know about Scrum", category);
-		Recommendation secondRecommendation = new Recommendation("What is Scrum?", "https://www.scrum.org/resources/what-scrum-module", "A deep dive to Scrum", category);
+		AppUser user = new AppUser("Testman", "TestingTheTests1", "USER");
+		Recommendation firstRecommendation = new Recommendation("The Scrum Guide 2020", "https://scrumguides.org/scrum-guide.html", "All you need to know about Scrum", category, user);
+		Recommendation secondRecommendation = new Recommendation("What is Scrum?", "https://www.scrum.org/resources/what-scrum-module", "A deep dive to Scrum", category, user);
 		categoryRepository.save(category);
+		userRepository.save(user);
 		recommendationRepository.saveAll(List.of(firstRecommendation, secondRecommendation));
 		
 		this.mockMvc.perform(get("/api/recommendations"))

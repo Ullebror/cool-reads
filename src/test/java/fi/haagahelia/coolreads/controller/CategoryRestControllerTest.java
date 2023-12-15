@@ -15,8 +15,10 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import fi.haagahelia.coolreads.model.AppUser;
 import fi.haagahelia.coolreads.model.Category;
 import fi.haagahelia.coolreads.model.Recommendation;
+import fi.haagahelia.coolreads.repository.AppUserRepository;
 import fi.haagahelia.coolreads.repository.CategoryRepository;
 import fi.haagahelia.coolreads.repository.ReadingRecommendationRepository;
 
@@ -28,6 +30,9 @@ public class CategoryRestControllerTest {
 	
 	@Autowired
 	ReadingRecommendationRepository recommendationRepository;
+	
+	@Autowired
+	AppUserRepository userRepository;
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -92,8 +97,10 @@ public class CategoryRestControllerTest {
 	@Test
 	public void getRecommendationsByCategoryIdReturnsListOfRecommendationsWhenCategoryHasRecommendations() throws Exception {
 		Category category = new Category("Scrum Guides");
-		Recommendation firstRecommendation = new Recommendation("The Scrum Guide 2020", "https://scrumguides.org/scrum-guide.html", "All you need to know about Scrum", category);
-		Recommendation secondRecommendation = new Recommendation("What is Scrum?", "https://www.scrum.org/resources/what-scrum-module", "A deep dive to Scrum", category);
+		AppUser user = new AppUser("Testman", "TestingTheTests1", "USER");
+		Recommendation firstRecommendation = new Recommendation("The Scrum Guide 2020", "https://scrumguides.org/scrum-guide.html", "All you need to know about Scrum", category, user);
+		Recommendation secondRecommendation = new Recommendation("What is Scrum?", "https://www.scrum.org/resources/what-scrum-module", "A deep dive to Scrum", category, user);
+		userRepository.save(user);
 		categoryRepository.save(category);
 		recommendationRepository.saveAll(List.of(firstRecommendation, secondRecommendation));
 		
