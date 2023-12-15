@@ -106,7 +106,7 @@ public class ReadingRecommendationController {
 	}
 
 	@PostMapping("/saveEditedReadingRecommendation")
-	public String saveEditedBook(@ModelAttribute Recommendation recommendationForm, @AuthenticationPrincipal UserDetails userDetails) {
+	public String saveEditedRecommendation(@ModelAttribute Recommendation recommendationForm, @AuthenticationPrincipal UserDetails userDetails) {
 		if (userDetails.getUsername().equalsIgnoreCase(recommendationForm.getUser().getUsername())) {
 			readingRepository.save(recommendationForm);
 			return "redirect:/";
