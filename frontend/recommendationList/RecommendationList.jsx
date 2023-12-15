@@ -3,11 +3,14 @@ import RecommendationListItem from "./RecommendationListItem";
 import fetchRecommendations from "./fetchRecommendations";
 import fetchCategories from "./fetchCategories";
 import fetchRecommendationbyCategoryId from "./fetchRecommendationbyCategoryId";
+import fetchCurrentUser from "./fetchCurrentUser";
 
 export default function RecommendationList() {
 	const [categories, setCategories] = useState([]);
 	const [selectedCategoryId, setSelectedCategoryId] = useState("any");
 	const [recommendations, setRecommendations] = useState([]);
+	const [currUser, setCurrUser] = useState(null);
+	const [showButton, setShowButton] = useState(false);
 
 	useEffect(() => {
 		fetchCategories().then((fetchedCategories) =>
@@ -26,6 +29,37 @@ export default function RecommendationList() {
 			);
 		}
 	}, [selectedCategoryId]);
+
+	useEffect(() => {
+		fetchCurrentUser(setCurrUser, setShowButton);
+		/*const getCurrUser = async () => {
+			setShowButton(false);
+			setCurrUser(null);
+			try {
+				
+				const response = await fetch(
+					"/api/users/current"
+				);
+				if (!response.ok) {
+					throw new Error(
+						"Something went wrong: " + response.statusText
+					);
+					
+				}
+				let userData = await response.json();
+				setCurrUser(userData);
+				setAddButton(true);
+			} catch(err) {
+				console.log(err);
+				setCurrUser(null);
+				setShowButton(false);
+			}
+			
+		}
+		getCurrUser()
+		*/
+					
+	},[])
 
 	function handleCategoryFilterChange(event) {
 		setSelectedCategoryId(event.target.value);
@@ -81,6 +115,7 @@ export default function RecommendationList() {
 						<th>Description</th>
 						<th>Added on</th>
 						<th>Category</th>
+						<th>Added by</th>
 						<th>Actions</th>
 					</tr>
 					{recommendations.map((recommendation) => (
@@ -92,9 +127,14 @@ export default function RecommendationList() {
 					))}
 				</tbody>
 			</table>
-			<a className="btn btn-primary" href="/add">
-				Add a recommendation
-			</a>
+			<div>
+				{showButton && 
+					<a className="btn btn-primary" href="/add">
+						Add a recommendation
+					</a>
+				}
+			</div>
+			
 		</div>
 	);
 }
