@@ -30,6 +30,8 @@ export default function RecommendationList() {
 		}
 	}, [selectedCategoryId]);
 
+	console.log(currUser);
+
 	useEffect(() => {
 		fetchCurrentUser(setCurrUser, setShowButton);
 		/*const getCurrUser = async () => {
@@ -123,6 +125,7 @@ export default function RecommendationList() {
 							recommendation={recommendation}
 							key={recommendation.id}
 							handleDelete={handleDelete}
+							currUser={currUser}
 						/>
 					))}
 				</tbody>

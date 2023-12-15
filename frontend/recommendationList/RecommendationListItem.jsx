@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import fetchCurrentUser from "./fetchCurrentUser";
 
 export default function RecommendationListItem(props) {
-  const [showButtons, setShowButtons] = useState(false)
+  const [showButtons, setShowButtons] = useState(false);
   const date = new Date(props.recommendation.creationDate);
   const formattedDate = date.toLocaleDateString("fi-FI", {
     year: "numeric",
@@ -9,7 +10,18 @@ export default function RecommendationListItem(props) {
     day: "2-digit",
   });
 
- /* if (props.currUser != null) {
+  useEffect(() => {
+    if (props.currUser != null) {
+      if (props.currUser.id === props.recommendation.user.id) {
+        setShowButtons(true);
+      } else {
+        setShowButtons(false);
+      }
+    } else {
+      setShowButtons(false);
+    }
+  }, [props.currUser, props.recommendation.user]);
+  /* if (props.currUser != null) {
     if (props.currUser.username === props.recommmendation.user.username) {
       setShowButtons(true)
     } else {
@@ -30,14 +42,23 @@ export default function RecommendationListItem(props) {
       <td>{props.recommendation.category.name}</td>
       <td>{props.recommendation.user.username}</td>
       <td>
-        <a className="btn btn-primary btn-xs" href={`/edit/${props.recommendation.id}`}>Edit</a>
-      </td>
-      <td>
-        <button
-          className="btn btn-danger"
-          onClick={() => props.handleDelete(props.recommendation)}>
+        {showButtons && (
+          <a
+            className="btn btn-primary btn-xs"
+            href={`/edit/${props.recommendation.id}`}
+          >
+            Edit
+          </a>
+        )}
+        {showButtons && (
+          <button
+            style={{ marginLeft: "10px"}}
+            className="btn btn-danger"
+            onClick={() => props.handleDelete(props.recommendation)}
+          >
             Delete
-        </button>
+          </button>
+        )}
       </td>
     </tr>
   );
