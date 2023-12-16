@@ -21,7 +21,7 @@ public class CategoryController {
 	
 	private static final Logger log = LoggerFactory.getLogger(ReadingRecommendationController.class);
 	
-	// Add category
+		// Add category
 		@GetMapping("/addcategory")
 		public String addCategory(Model model) {
 			model.addAttribute("category", new Category());

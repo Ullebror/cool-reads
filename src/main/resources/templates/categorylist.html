@@ -7,7 +7,7 @@
  <ul>
         <li th:each="category : ${categories}" th:text="${category.name}">Category Name</li>
     </ul>
-    <a class="btn btn-primary" href="/addcategory">Add category </a>
+    <a sec:authorize="isAuthenticated()" class="btn btn-primary" href="/addcategory">Add category </a>
 	</div>
 </body>
 </html>
