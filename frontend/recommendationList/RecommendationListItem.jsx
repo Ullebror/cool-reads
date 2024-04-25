@@ -33,23 +33,25 @@ export default function RecommendationListItem(props) {
       <td>{props.recommendation.category.name}</td>
       <td>{props.recommendation.user.username}</td>
       <td>
-        {showButtons && (
-          <a
-            className="btn btn-primary btn-xs"
-            href={`/edit/${props.recommendation.id}`}
-          >
-            Edit
-          </a>
-        )}
-        {showButtons && (
-          <button
-            style={{ marginLeft: "10px"}}
-            className="btn btn-danger"
-            onClick={() => props.handleDelete(props.recommendation)}
-          >
-            Delete
-          </button>
-        )}
+        <div style={{width: "135px"}}>
+          {showButtons && (
+            <a
+              className="btn btn-primary btn-xs"
+              href={`/edit/${props.recommendation.id}`}
+            >
+              Edit
+            </a>
+          )}
+          {showButtons && (
+            <button
+              style={{ marginLeft: "10px"}}
+              className="btn btn-danger"
+              onClick={() => props.handleDelete(props.recommendation)}
+            >
+              Delete
+            </button>
+          )}
+        </div>
       </td>
     </tr>
   );

@@ -19,7 +19,6 @@ public class AppUserSignUpForm {
 	@Size(min = 8, message = "Password must have at least 8 characters")
 	@Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]+$", message = "Password must contain at least one letter and one number")
 	private String password_hash = "";
-	//private String password = "";
 
 	@NotEmpty(message = "Password is required")
 	@Size(min = 8, message = "Password must have at least 8 characters")

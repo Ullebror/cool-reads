@@ -13,12 +13,12 @@ import fi.haagahelia.coolreads.repository.AppUserRepository;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 	private final AppUserRepository repository;
- 
+
 	@Autowired
 	public UserDetailsServiceImpl(AppUserRepository userRepository) {
 		this.repository = userRepository;
 	}
- 
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// Fetching the user from the repository
@@ -29,23 +29,3 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		return user;
 	}
 }
-/*@Service
-public class UserDetailsServiceImpl implements UserDetailsService {
-    @Autowired
-    private AppUserRepository userRepository;
-    
-    
-
-    /* @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    	
-    	
-    	
-        AppUser user = userRepository.findByUsername(username);
-                        //.orElseThrow(() -> new UsernameNotFoundException(username));
-
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword_hash(),
-                    AuthorityUtils.createAuthorityList(user.getRole()));
-    } 
-    
-}*/

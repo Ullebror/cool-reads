@@ -50,20 +50,20 @@ public class ReadingRecommendationController {
 
 	// Save new recommendation
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String saveRecommendation(@Valid @ModelAttribute("recommendation") RecommendationDto recommendation, BindingResult bindingResult,
-				@AuthenticationPrincipal UserDetails userDetails, Model model) {
-		if(bindingResult.hasErrors()) {
+	public String saveRecommendation(@Valid @ModelAttribute("recommendation") RecommendationDto recommendation,
+			BindingResult bindingResult, @AuthenticationPrincipal UserDetails userDetails, Model model) {
+		if (bindingResult.hasErrors()) { //checks that the recommendation is Valid
 			model.addAttribute("recommendation", recommendation);
 			return "addrecommendation";
 		}
-		
+
 		AppUser user = userRepository.findByUsername(userDetails.getUsername());
-		
-		if (user == null) {
+
+		if (user == null) { // checks if user is signed in
 			return "redirect:/";
 		}
-		Recommendation newRecommendation = new Recommendation(recommendation.getTitle(), recommendation.getLink(), recommendation.getDescription(),
-				recommendation.getCategory(), user);
+		Recommendation newRecommendation = new Recommendation(recommendation.getTitle(), recommendation.getLink(),
+				recommendation.getDescription(), recommendation.getCategory(), user);
 		readingRepository.save(newRecommendation);
 		return "redirect:/";
 	}
@@ -82,47 +82,45 @@ public class ReadingRecommendationController {
 		return "recommendationlist";
 	}
 
-	
 	@GetMapping("/edit/{id}")
-	public String editReadingRecommendation(@PathVariable("id") Long id, Model model, @AuthenticationPrincipal UserDetails userDetails) {
-		
+	public String editReadingRecommendation(@PathVariable("id") Long id, Model model,
+			@AuthenticationPrincipal UserDetails userDetails) {
+
 		model.addAttribute("categories", categoryRepository.findAll());
 		Recommendation recommendation = readingRepository.findById(id).orElse(null);
+		//checks that the user is the one that added the recommendation
 		if (userDetails.getUsername().equalsIgnoreCase(recommendation.getUser().getUsername())) {
 			if (recommendation != null) {
 				model.addAttribute("recommendation", recommendation);
 				return "editrecommendation";
 			}
 		}
-		
-		return "redirect:/";
 
-		/*if (recommendation != null) {
-			model.addAttribute("recommendation", recommendation);
-			return "editrecommendation";
-		} else {
-			return "redirect:/";
-		} */
+		return "redirect:/";
 	}
 
 	@PostMapping("/saveEditedReadingRecommendation")
-	public String saveEditedRecommendation(@ModelAttribute Recommendation recommendationForm, @AuthenticationPrincipal UserDetails userDetails) {
+	public String saveEditedRecommendation(@ModelAttribute Recommendation recommendationForm,
+			@AuthenticationPrincipal UserDetails userDetails) {
+		//checks that the user is the one that added the recommendation
 		if (userDetails.getUsername().equalsIgnoreCase(recommendationForm.getUser().getUsername())) {
 			readingRepository.save(recommendationForm);
 			return "redirect:/";
 		} else {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized user");
 		}
-		
+
 	}
 
 	@PostMapping("/delete/{id}")
-	public String deleteRecommendation(@PathVariable("id") Long id, Model model, @AuthenticationPrincipal UserDetails userDetails) {
+	public String deleteRecommendation(@PathVariable("id") Long id, Model model,
+			@AuthenticationPrincipal UserDetails userDetails) {
 		Recommendation recommendation = readingRepository.findById(id).orElse(null);
+		//checks that the user is the one that added the recommendation
 		if (userDetails.getUsername().equalsIgnoreCase(recommendation.getUser().getUsername())) {
 			readingRepository.deleteById(id);
 		}
-		
+
 		return "redirect:/";
 	}
 }
